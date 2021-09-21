@@ -6,10 +6,23 @@ public class Client : MonoBehaviour
     public PlayerMovement pm;
     public Invoker invoker;
 
+    //from unity documentation
+    private void Awake()
+    {
+        GameObject[] objs = GameObject.FindGameObjectsWithTag("Client");
+        if (objs.Length > 1)
+        {
+            Destroy(this.gameObject);
+        }
+
+        DontDestroyOnLoad(this.gameObject);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         m_PlayerReciever = new PlayerReciever(pm);
+        DontDestroyOnLoad(this.gameObject);
     }
 
     // Update is called once per frame

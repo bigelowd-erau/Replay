@@ -9,7 +9,8 @@ public class GameManager : MonoBehaviour
     public float restartDelay = 1f;
     //the complete level panel
     public GameObject completeLevelScreen;
-    
+    public GameObject replayClientPrefab;
+
     //called when the end object is triggered
     public void CompleteLevel()
     {
@@ -28,16 +29,31 @@ public class GameManager : MonoBehaviour
             //set game as ended
             gameHasEnded = true;
             //call the restart function after the defined restart delay
-            Invoke("Restart", restartDelay);
+            //Invoke("Restart", restartDelay);
+            Invoke("LoadReplay", restartDelay);
         }
-        
+
     }
 
     //reloads the current level
     void Restart()
     {
+        //Destroy(GameObject.FindGameObjectWithTag("Client"));
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    
+    void LoadReplay()
+    {
+        //FindObjectOfType<Client>().enabled = true;
+        Debug.Log(FindObjectOfType<Client>().invoker.commandQueue.Count );
+        GameObject replayClient = Instantiate(replayClientPrefab);
+        DontDestroyOnLoad(replayClient);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    void EndReplay()
+    {
+        Destroy(GameObject.FindGameObjectWithTag("Client"));
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
 }
