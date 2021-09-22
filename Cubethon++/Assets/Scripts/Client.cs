@@ -28,17 +28,21 @@ public class Client : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (Input.GetKey("a"))
+        //if not in a replay allow for control input
+        if (!GameObject.FindObjectOfType<Invoker>().inReplay)
         {
-            Command playerCommand = new MoveLeftCommand(m_PlayerReciever);
-            invoker.SetCommand(playerCommand);
-            invoker.ExecuteCommand();
-        }
-        if (Input.GetKey("d"))
-        {
-            Command playerCommand = new MoveRightCommand(m_PlayerReciever);
-            invoker.SetCommand(playerCommand);
-            invoker.ExecuteCommand();
+            if (Input.GetKey("a"))
+            {
+                Command playerCommand = new MoveLeftCommand(m_PlayerReciever);
+                invoker.SetCommand(playerCommand);
+                invoker.ExecuteCommand();
+            }
+            if (Input.GetKey("d"))
+            {
+                Command playerCommand = new MoveRightCommand(m_PlayerReciever);
+                invoker.SetCommand(playerCommand);
+                invoker.ExecuteCommand();
+            }
         }
     }
 }
