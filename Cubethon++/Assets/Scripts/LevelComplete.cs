@@ -8,7 +8,6 @@ public class LevelComplete : MonoBehaviour
     //will load the nexet level in the build order
     public void LoadNextLevel()
     {
-        Destroy(GameObject.FindGameObjectWithTag("Client"));
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        GameObject.FindObjectOfType<GameManager>().NextLevel();
     }
 }

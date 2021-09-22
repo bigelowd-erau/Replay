@@ -10,6 +10,12 @@ public class GameManager : MonoBehaviour
     //the complete level panel
     public GameObject completeLevelScreen;
     public GameObject replayClientPrefab;
+    bool inReplay = false;
+
+    private void Awake()
+    {
+        //DontDestroyOnLoad(this);
+    }
 
     //called when the end object is triggered
     public void CompleteLevel()
@@ -24,28 +30,54 @@ public class GameManager : MonoBehaviour
     public void EndGame()
     {
         //checks game has not previously quit    
-        if (gameHasEnded == false)
+        if (!GameObject.FindObjectOfType<Invoker>().inReplay)
         {
-            //set game as ended
-            gameHasEnded = true;
+            GameObject.FindObjectOfType<Invoker>().inReplay = true;
             //call the restart function after the defined restart delay
-            //Invoke("Restart", restartDelay);
             Invoke("LoadReplay", restartDelay);
+        }
+        else
+        {
+            Invoke("Restart", restartDelay);
         }
 
     }
 
-    //reloads the current level
+    //Is called when the end of level is reached
+    public void NextLevel()
+    {
+        //get if in replay through the immortal invoker
+        if (!GameObject.FindObjectOfType<Invoker>().inReplay)
+        { // if not in replay when next level was called, go to replay
+            GameObject.FindObjectOfType<Invoker>().inReplay = true;
+            //call the loadReplay function after the defined restart delay
+            Invoke("LoadReplay", restartDelay);
+        }
+        else
+        {
+            DestroyImmortals();
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+    }
+
+    //restarts the current level
     void Restart()
     {
-        //Destroy(GameObject.FindGameObjectWithTag("Client"));
+        DestroyImmortals();
+        inReplay = false;
+        Debug.Log("Stuff destroyed");
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    //Destroys objects that were set to dont destroy on load
+    private void DestroyImmortals()
+    {
+        Destroy(GameObject.FindGameObjectWithTag("Client"));
+        Destroy(GameObject.FindGameObjectWithTag("ReplayClient"));
     }
 
     void LoadReplay()
     {
-        //FindObjectOfType<Client>().enabled = true;
-        Debug.Log(FindObjectOfType<Client>().invoker.commandQueue.Count );
         GameObject replayClient = Instantiate(replayClientPrefab);
         DontDestroyOnLoad(replayClient);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);

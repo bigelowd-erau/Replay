@@ -3,7 +3,6 @@ using UnityEngine;
 public class Client : MonoBehaviour
 {
     private PlayerController m_PlayerReciever;
-    public PlayerMovement pm;
     public Invoker invoker;
 
     //from unity documentation
@@ -21,7 +20,7 @@ public class Client : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        m_PlayerReciever = new PlayerReciever(pm);
+        m_PlayerReciever = new PlayerReciever();
         DontDestroyOnLoad(this.gameObject);
     }
 

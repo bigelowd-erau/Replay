@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 6397764579911803902}
   m_Layer: 0
   m_Name: Player 1
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -145,7 +145,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movement: {fileID: 5488632779746080821}
   playerGravity: {fileID: 6397764579911803902}
-  client: {fileID: 3320519270952794106, guid: 1b2e13f0f0e333b4cac636a358c41179, type: 3}
 --- !u!114 &6397764579911803902
 MonoBehaviour:
   m_ObjectHideFlags: 0

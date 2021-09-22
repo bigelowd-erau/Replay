@@ -5,7 +5,6 @@ public class PlayerCollision : MonoBehaviour
 {
     public PlayerMovement movement;
     public PlayerGravity playerGravity;
-    public Client client;
 
     //when the player collides with another object
     void OnCollisionEnter(Collision collision)
@@ -28,7 +27,8 @@ public class PlayerCollision : MonoBehaviour
         {
             //disable player movment script
             movement.enabled = false;
-            client.enabled = false;
+            GameObject.FindGameObjectWithTag("Client").GetComponent<Client>().enabled = false;
+            //client.enabled = false;
             collision.collider.GetComponent<MeshRenderer>().material.color = Color.red;
             FindObjectOfType<GameManager>().EndGame();
         }

@@ -2,35 +2,53 @@ using UnityEngine;
 
 public class ReplayClient : MonoBehaviour
 {
-    public Invoker invoker;
+    //public Invoker invoker;
     private CommandData currentCommand;
 
     public void Awake()
     {
-        SetCurrentCommand();
+
+        currentCommand = GameObject.FindGameObjectWithTag("Client").GetComponent<Invoker>().commandQueue.Dequeue();
+        //invoker = GameObject.FindGameObjectWithTag("Client").GetComponent<Invoker>(); ;
+        //SetCurrentCommand();
+        /*foreach (CommandData cd in GameObject.FindGameObjectWithTag("Client").GetComponent<Invoker>().commandQueue)
+        {
+            Debug.Log(cd.command.ToString());
+        }*/
     }
 
-    public void Update()
+    public void FixedUpdate()
     {
         //current time running has gotten to (or slightly passed) when the command wa scalled initially
         if (Time.timeSinceLevelLoad >= currentCommand.timeOfExecution)
         {
-            invoker.SetCommand(currentCommand.command);
-            invoker.ExecuteCommand();
-            if (!SetCurrentCommand())
-                FindObjectOfType<GameManager>().EndGame();
+            if (GameObject.FindGameObjectWithTag("Client").GetComponent<Invoker>().commandQueue.Count > 0)
+            {
+            
+                GameObject.FindGameObjectWithTag("Client").GetComponent<Invoker>().SetCommand(currentCommand.command);
+                //invoker.SetCommand(currentCommand.command);
+                GameObject.FindGameObjectWithTag("Client").GetComponent<Invoker>().ExecuteCommand();
+                currentCommand = GameObject.FindGameObjectWithTag("Client").GetComponent<Invoker>().commandQueue.Dequeue();
+
+                //invoker.ExecuteCommand();
+                //SetCurrentCommand();
+                //if (!SetCurrentCommand())
+                //FindObjectOfType<GameManager>().Restart();
+            }
         }
     }
 
-    private bool SetCurrentCommand()
+    /*private void SetCurrentCommand()
     {
-        if (invoker.commandQueue.Count > 0)
+        int commandsLeft = GameObject.FindGameObjectWithTag("Client").GetComponent<Invoker>().commandQueue.Count;
+        Debug.Log(commandsLeft);
+        if (commandsLeft > 0)
         {
-            currentCommand = invoker.commandQueue.Dequeue();
-            return true;
+            currentCommand = GameObject.FindGameObjectWithTag("Client").GetComponent<Invoker>().commandQueue.Dequeue();
+            //GameObject.FindGameObjectWithTag("Client").GetComponent<Invoker>().commandQueue.Dequeue();
         } else
         {
-            return false;
+            
         }
-    }
+    }*/
 }
