@@ -2,20 +2,15 @@ using UnityEngine;
 
 public class PlayerReciever : PlayerController
 {
-    public PlayerReciever()
-    {
-    }
     public override void MoveLeft()
     {
+        //Find the player object and find th emovement script then call move left
         GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().MoveLeft();
-        //pm.MoveLeft();
-        //Debug.Log("Move Left");
     }
 
     public override void MoveRight()
     {
+        //Find the player object and find th emovement script then call move right
         GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().MoveRight();
-        //pm.MoveRight();
-        //Debug.Log("Move Right");
     }
 }

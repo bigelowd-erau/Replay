@@ -8,6 +8,7 @@ public class Client : MonoBehaviour
     //from unity documentation
     private void Awake()
     {
+        //simple unity singleton pattern, ensures only newest is destroiyed
         GameObject[] objs = GameObject.FindGameObjectsWithTag("Client");
         if (objs.Length > 1)
         {
@@ -30,16 +31,12 @@ public class Client : MonoBehaviour
         if (Input.GetKey("a"))
         {
             Command playerCommand = new MoveLeftCommand(m_PlayerReciever);
-            //Invoker invoker = new Invoker();
-
             invoker.SetCommand(playerCommand);
             invoker.ExecuteCommand();
         }
         if (Input.GetKey("d"))
         {
             Command playerCommand = new MoveRightCommand(m_PlayerReciever);
-            //Invoker invoker = new Invoker();
-
             invoker.SetCommand(playerCommand);
             invoker.ExecuteCommand();
         }

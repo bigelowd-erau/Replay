@@ -44,5 +44,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   restartDelay: 1
-  completeLevelScreen: {fileID: 0}
+  completeLevelScreen: {fileID: 1257784484369029253, guid: b50d339b6103e9f4e960411d77b83d73, type: 3}
   replayClientPrefab: {fileID: 3796948738764819631, guid: 37d0fecc50286fe48a6bbaf78bb13fc7, type: 3}
+  replayCanvasPrefab: {fileID: 2667738263042145068, guid: 3ac90b0dcf38f9b41aa8a24b86faf87b, type: 3}

@@ -6,8 +6,7 @@ public class PlayerCollision : MonoBehaviour
     public PlayerMovement movement;
     public PlayerGravity playerGravity;
 
-    //when the player collides with another object
-    void OnCollisionEnter(Collision collision)
+    private void OnCollisionStay(Collision collision)
     {
         //iff the collider is a floor
         if (collision.collider.tag == "Floor")

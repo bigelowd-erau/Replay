@@ -8,6 +8,7 @@ TagManager:
   - Floor
   - Client
   - ReplayClient
+  - ReplayCanvas
   layers:
   - Default
   - TransparentFX
