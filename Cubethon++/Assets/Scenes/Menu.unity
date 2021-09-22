@@ -369,7 +369,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'Cubethon++
 
-    Command Log'
+    REPLAY'
 --- !u!222 &163903554
 CanvasRenderer:
   m_ObjectHideFlags: 0

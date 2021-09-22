@@ -6,6 +6,7 @@ public class PlayerCollision : MonoBehaviour
     public PlayerMovement movement;
     public PlayerGravity playerGravity;
 
+    //for prolonged collision
     private void OnCollisionStay(Collision collision)
     {
         //iff the collider is a floor
@@ -21,8 +22,13 @@ public class PlayerCollision : MonoBehaviour
                 playerGravity.ChangeGravity(movement.playerRotation);
             }
         }
+       
+    }
+    //for the instant a collision happens
+    private void OnCollisionEnter(Collision collision)
+    {
         //if the object collided into has a tag of obstacle
-        else if (collision.collider.tag == "Obstacle")
+        if (collision.collider.tag == "Obstacle")
         {
             //disable player movment script
             movement.enabled = false;
